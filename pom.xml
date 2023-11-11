@@ -26,6 +26,13 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/kmaba/noMemberShutdown</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <resources>
