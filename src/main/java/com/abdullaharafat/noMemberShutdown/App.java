@@ -2,14 +2,22 @@ package com.abdullaharafat.noMemberShutdown;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class App extends JavaPlugin {
+public class App extends JavaPlugin implements Listener {
+
     @Override
     public void onEnable() {
         getLogger().info("noMemberShutdown has started");
+
+        getServer().getPluginManager().registerEvents(this, this);
+
         saveDefaultConfig();
         FileConfiguration config = getConfig();
+
         int delayInSeconds = config.getInt("shutdownDelay");
         getServer().getScheduler().runTaskTimer(this, () -> {
             if (Bukkit.getOnlinePlayers().isEmpty()) {
@@ -22,5 +30,11 @@ public class App extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info("noMemberShutdown has stopped");
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        getServer().getScheduler().cancelTasks(this);
+        getLogger().info("Scheduled shutdown canceled. A player has joined.");
     }
 }
