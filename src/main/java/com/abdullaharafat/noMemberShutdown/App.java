@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class NoMemberShutdown extends JavaPlugin {
+public class App extends JavaPlugin {
     @Override
     public void onEnable() {
         getLogger().info("noMemberShutdown has started");
