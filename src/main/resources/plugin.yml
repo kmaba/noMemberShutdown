@@ -1,5 +1,5 @@
-name: PluginDemo
-main: com.briangershon.demo.App
-description: Plugin Demo
+name: noMemberShutdown
+main: com.abdullaharafat.noMemberShutdown.App
+description: Shuts down the server if no members are online for a specified time.
 version: ${project.version}
 api-version: 1.13
