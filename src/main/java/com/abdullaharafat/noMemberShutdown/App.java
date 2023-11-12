@@ -36,5 +36,14 @@ public class App extends JavaPlugin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         getServer().getScheduler().cancelTasks(this);
         getLogger().info("Scheduled shutdown canceled. A player has joined.");
+    
+        int delayInSeconds = getConfig().getInt("shutdownDelay");
+        getServer().getScheduler().runTaskTimer(this, () -> {
+            if (Bukkit.getOnlinePlayers().isEmpty()) {
+                getLogger().info("No members online. Server will shut down in " + delayInSeconds + " seconds.");
+                Bukkit.getServer().getScheduler().runTaskLater(this, Bukkit::shutdown, delayInSeconds * 20L);
+            }
+        }, 0L, 20L * 60L);
     }
+    
 }
